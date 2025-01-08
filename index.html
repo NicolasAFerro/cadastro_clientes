@@ -17,13 +17,13 @@
       <section>
         <form action="">
           <div class="row mb-2">
-            <div class="col">
+            <div class="col-md-6">
               <div>
                 <label for="inputName" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="inputName" />
               </div>
             </div>
-            <div class="col">
+            <div class="col-md-6">
               <div>
                 <label for="inputSurname" class="form-label">Sobrenome</label>
                 <input type="text" class="form-control" id="inputSurname" />
@@ -31,7 +31,7 @@
             </div>
           </div>
           <div class="row mb-2">
-            <div class="col-3">
+            <div class="col-md-3">
               <div>
                 <label for="inputCep" class="form-label"
                   >Pesquise pelo cep:</label
@@ -41,7 +41,7 @@
             </div>
           </div>
           <div class="row mb-2">
-            <div class="col-10">
+            <div class="col-md-10">
               <div>
                 <label for="logradouro" class="form-label">Endereço:</label>
                 <input
@@ -52,7 +52,7 @@
                 />
               </div>
             </div>
-            <div class="col">
+            <div class="col-5 col-md-2">
               <div>
                 <label for="inputNumber" class="form-label">Número:</label>
                 <input
@@ -65,13 +65,13 @@
             </div>
           </div>
           <div class="row mb-2">
-            <div class="col">
+            <div class="col-md-6">
               <div>
                 <label for="bairro" class="form-label">Bairro:</label>
                 <input type="text" class="form-control" id="bairro" disabled />
               </div>
             </div>
-            <div class="col">
+            <div class="col-md-6">
               <div>
                 <label for="localidade" class="form-label">Cidade:</label>
                 <input
@@ -84,7 +84,7 @@
             </div>
           </div>
           <div class="row mb-2">
-            <div class="col-2">
+            <div class="col-5 col-md-2">
               <div>
                 <label for="estado" class="form-label">Estado</label>
                 <input type="text" class="form-control" id="estado" disabled />
@@ -102,11 +102,19 @@
             <tr>
               <th scope="col " class="text-center">#</th>
               <th scope="col" class="text-center">Nome Completo</th>
-              <th scope="col" class="text-center">Endereço</th>
+              <th scope="col" class="d-none d-sm-table-cell text-center">
+                Endereço
+              </th>
               <th scope="col" class="text-center">CEP</th>
-              <th scope="col" class="text-center">Bairro</th>
-              <th scope="col" class="text-center">Cidade</th>
-              <th scope="col" class="text-center">Estado</th>
+              <th scope="col" class="d-none d-md-table-cell text-center">
+                Bairro
+              </th>
+              <th scope="col" class="d-none d-md-table-cell text-center">
+                Cidade
+              </th>
+              <th scope="col" class="d-none d-lg-table-cell text-center">
+                Estado
+              </th>
             </tr>
           </thead>
           <tbody>

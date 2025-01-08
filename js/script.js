@@ -53,7 +53,7 @@ function addClient(client){
 
     var logradouroNode = document.createTextNode(client.logradouro);            
     var logradouroNameCell= newRow.insertCell(); 
-    logradouroNameCell.className='text-center';
+    logradouroNameCell.className='d-none d-sm-table-cell text-center';
     logradouroNameCell.appendChild(logradouroNode); 
 
     var cepNode = document.createTextNode(client.cep);            
@@ -63,17 +63,17 @@ function addClient(client){
 
     var bairroNode = document.createTextNode(client.bairro);            
     var bairroNameCell= newRow.insertCell(); 
-    bairroNameCell.className='text-center';
+    bairroNameCell.className='d-none d-md-table-cell text-center';
     bairroNameCell.appendChild(bairroNode); 
 
     var cidadeNode = document.createTextNode(client.cidade);            
     var cidadeCell= newRow.insertCell(); 
-    cidadeCell.className='text-center';
+    cidadeCell.className='d-none d-md-table-cell text-center';
     cidadeCell.appendChild(cidadeNode);
   
     var estadoNode = document.createTextNode(client.estado);            
     var estadoCell= newRow.insertCell(); 
-    estadoCell.className='text-center';
+    estadoCell.className='d-none d-lg-table-cell text-center';
     estadoCell.appendChild(estadoNode);
     // id: 1,
     // fullName: 'João Silva', 
