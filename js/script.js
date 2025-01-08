@@ -1,3 +1,4 @@
+$("#inputCep").mask('00000-000');
 var clients = [ 
     {
         id: 1,
@@ -34,7 +35,57 @@ function loadClients(){
     for(let client of clients){ 
         addClient(client);
     }
+} 
+
+function saveClient(client){ 
+
 }
+
+function validaCep(){ 
+    var cep=document.getElementById('inputCep').value; 
+    cep=cep.replace('-',"");
+    var url = `https://viacep.com.br/ws/${cep}/json/`;  
+    var inputCep = document.getElementById('inputCep');
+    try{ 
+        fetch(url)
+        .then((response)=> response.json())
+        .then((data)=>{
+            console.log(JSON.stringify(data));
+            if(!data.erro){ 
+                preencheCampos(data);
+            }
+            else{ 
+                inputCep.setCustomValidity('CEP não encontrado.');
+                inputCep.reportValidity(); 
+            }
+        })
+
+    }catch(error) 
+    { 
+        console.log(`o erro é: ${error}`)
+    }
+  
+}
+function preencheCampos(data){  
+    document.getElementById('logradouro').value=data.logradouro; 
+    document.getElementById('bairro').value=data.bairro; 
+    document.getElementById('localidade').value=data.localidade;  
+    document.getElementById('estado').value=data.estado; 
+    document.getElementById('inputNumber').disabled =false;  
+    inputCep.setCustomValidity('');
+
+}
+function limparCampos(){ 
+    document.getElementById('inputName').value=null; 
+    document.getElementById('inputSurname').value=null;
+    document.getElementById('logradouro').value=null;
+    document.getElementById('bairro').value=null;
+    document.getElementById('localidade').value=null;
+    document.getElementById('estado').value=null;
+    document.getElementById('inputNumber').disabled =true;  
+    document.getElementById('inputCep').value=null;
+}
+
 
 function addClient(client){ 
     var table = document.getElementById("clientTable"); 

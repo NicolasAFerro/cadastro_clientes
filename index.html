@@ -15,18 +15,28 @@
     <div class="fs-4 fw-bold mt-3 text-center">Cadastro de Clientes:</div>
     <main class="container shadow-lg p-5 mb-5 bg-body-tertiary rounded mt-3">
       <section>
-        <form action="">
+        <form action="" onsubmit=" return false">
           <div class="row mb-2">
             <div class="col-md-6">
               <div>
                 <label for="inputName" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="inputName" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputName"
+                  required
+                />
               </div>
             </div>
             <div class="col-md-6">
               <div>
                 <label for="inputSurname" class="form-label">Sobrenome</label>
-                <input type="text" class="form-control" id="inputSurname" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputSurname"
+                  required
+                />
               </div>
             </div>
           </div>
@@ -36,7 +46,13 @@
                 <label for="inputCep" class="form-label"
                   >Pesquise pelo cep:</label
                 >
-                <input type="text" class="form-control" id="inputCep" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputCep"
+                  onblur="validaCep()"
+                  required
+                />
               </div>
             </div>
           </div>
@@ -129,6 +145,9 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
