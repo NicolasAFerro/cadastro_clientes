@@ -1,43 +1,43 @@
-$("#inputCep").mask('00000-000');
-var clients = [ 
-    {
-        id: 1,
-        fullName: 'Maria Silva', 
-        logradouro: 'Rua tancredo Neves,144', 
-        cep: '18087-013', 
-        bairro: 'Centro', 
-        cidade: 'Sorocaba',
-        estado:'SP'
-    }, 
-    {
-        id: 1,
-        fullName: 'Marcos Silva', 
-        logradouro: 'Rua tancredo Neves,14', 
-        cep: '18087-013', 
-        bairro: 'Jardim imperador', 
-        cidade: 'São Paulo',
-        estado:'SP'
-    },  
-    {
-        id: 1,
-        fullName: 'João Silva', 
-        logradouro: 'Rua tancredo Neves,145', 
-        cep: '18087-015', 
-        bairro: 'Copacabana', 
-        cidade: 'Rio de Janeiro',
-        estado:'RJ'
-    },  
-];  
+$("#inputCep").mask('00000-000'); 
+// {
+//     id: 1,
+//     fullName: 'Maria Silva', 
+//     logradouro: 'Rua tancredo Neves,144', 
+//     cep: '18087-013', 
+//     bairro: 'Centro', 
+//     cidade: 'Sorocaba',
+//     estado:'SP'
+// }, 
+var clients = [];  
 
-loadClients(); 
 
-function loadClients(){ 
-    for(let client of clients){ 
-        addClient(client);
+
+function saveClient(){ 
+    try {
+        var client={ 
+            id:clients.length+1, 
+            fullName: document.getElementById('inputName').value +" "+ document.getElementById('inputSurname').value, 
+            logradouro: document.getElementById('logradouro').value,
+            cep: document.getElementById('inputCep').value, 
+            bairro:document.getElementById('bairro').value, 
+            cidade: document.getElementById('localidade').value,
+            estado: document.getElementById('estado').value
+    
+        };
+        addClient(client); 
+        clients.push(client);    
+        document.getElementById('inputNumber').disabled =true;  
+        document.getElementById("clientForm").reset(); 
+       
+
+    } catch (error) {
+        alert(`erro: ${error}`);
     }
-} 
-
-function saveClient(client){ 
+    
+  
+    
+  
+    
 
 }
 
@@ -50,7 +50,7 @@ function validaCep(){
         fetch(url)
         .then((response)=> response.json())
         .then((data)=>{
-            console.log(JSON.stringify(data));
+            //console.log(JSON.stringify(data));
             if(!data.erro){ 
                 preencheCampos(data);
             }
@@ -75,16 +75,7 @@ function preencheCampos(data){
     inputCep.setCustomValidity('');
 
 }
-function limparCampos(){ 
-    document.getElementById('inputName').value=null; 
-    document.getElementById('inputSurname').value=null;
-    document.getElementById('logradouro').value=null;
-    document.getElementById('bairro').value=null;
-    document.getElementById('localidade').value=null;
-    document.getElementById('estado').value=null;
-    document.getElementById('inputNumber').disabled =true;  
-    document.getElementById('inputCep').value=null;
-}
+
 
 
 function addClient(client){ 
