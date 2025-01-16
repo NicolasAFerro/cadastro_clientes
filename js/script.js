@@ -9,25 +9,28 @@ $("#inputCep").mask("00000-000");
 //     estado:'SP'
 // },
 var clients = [];
+var cepIsValide = false;
 
 function saveClient() {
   try {
-    var client = {
-      id: clients.length + 1,
-      fullName:
-        document.getElementById("inputName").value +
-        " " +
-        document.getElementById("inputSurname").value,
-      logradouro: document.getElementById("logradouro").value,
-      cep: document.getElementById("inputCep").value,
-      bairro: document.getElementById("bairro").value,
-      cidade: document.getElementById("localidade").value,
-      estado: document.getElementById("estado").value,
-    };
-    addClient(client);
-    clients.push(client);
-    document.getElementById("inputNumber").disabled = true;
-    document.getElementById("clientForm").reset();
+    if (cepIsValide) {
+      var client = {
+        id: clients.length + 1,
+        fullName:
+          document.getElementById("inputName").value +
+          " " +
+          document.getElementById("inputSurname").value,
+        logradouro: document.getElementById("logradouro").value,
+        cep: document.getElementById("inputCep").value,
+        bairro: document.getElementById("bairro").value,
+        cidade: document.getElementById("localidade").value,
+        estado: document.getElementById("estado").value,
+      };
+      addClient(client);
+      clients.push(client);
+      document.getElementById("inputNumber").disabled = true;
+      document.getElementById("clientForm").reset();
+    }
   } catch (error) {
     alert(`erro: ${error}`);
   }
@@ -35,26 +38,35 @@ function saveClient() {
 
 function validaCep() {
   var cep = document.getElementById("inputCep").value;
+
   cep = cep.replace("-", "");
   var url = `https://viacep.com.br/ws/${cep}/json/`;
   var inputCep = document.getElementById("inputCep");
+  console.log(cep);
   try {
+    console.log("cep.lent:" + cep.length);
     if (cep.length === 8) {
+      inputCep.setCustomValidity(""); // Limpa a mensagem
+      inputCep.reportValidity();
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
           //console.log(JSON.stringify(data));
           if (!data.erro) {
             preencheCampos(data);
+            cepIsValide = true;
           } else {
             inputCep.setCustomValidity("CEP não encontrado.");
             inputCep.reportValidity();
+            cepIsValide = false;
           }
         });
     } else {
-      inputCep.setCustomValidity("CEP Inválido.");
-      inputCep.reportValidity();
+      //alert("to aqui");
       limparCampos();
+      showErro("CEP inválido");
+
+      cepIsValide = false;
     }
   } catch (error) {
     console.log(`o erro é: ${error}`);
@@ -65,8 +77,8 @@ function preencheCampos(data) {
   document.getElementById("bairro").value = data.bairro;
   document.getElementById("localidade").value = data.localidade;
   document.getElementById("estado").value = data.estado;
+  document.getElementById("inputNumber").value = null;
   document.getElementById("inputNumber").disabled = false;
-  inputCep.setCustomValidity("");
 }
 
 function addClient(client) {
@@ -111,10 +123,18 @@ function addClient(client) {
 }
 
 function limparCampos() {
+  var inputCep = document.getElementById("inputCep");
   document.getElementById("logradouro").value = null;
   document.getElementById("bairro").value = null;
   document.getElementById("localidade").value = null;
   document.getElementById("estado").value = null;
-  document.getElementById("inputNumber").disabled = false;
+  document.getElementById("inputNumber").value = null;
+  document.getElementById("inputNumber").disabled = true;
   inputCep.setCustomValidity("");
+  inputCep.reportValidity();
+}
+function showErro(message) {
+  var inputCep = document.getElementById("inputCep");
+  inputCep.setCustomValidity(`${message}`);
+  inputCep.reportValidity();
 }
